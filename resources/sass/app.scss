@@ -1,0 +1,27 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import 'events.scss';
+@import 'news.scss';
+
+.welcome-text {
+  font-size: 3em;
+}
+
+a {
+  text-decoration: none;
+  text-emphasis: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  text-emphasis: none;
+  color: grey;
+}
