@@ -49,7 +49,7 @@
     <div class="form-group">
       <label for="attachment">Choose an attachment:</label>
       <br>
-      <input type="file" id="attachment" name="file" accept="file/pdf" aria-describedby="file-name">
+      <input type="file" id="attachment" name="file" accept="application/pdf" aria-describedby="file-name">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

@@ -16,7 +16,7 @@ class News extends Model
 		'publication_date',
 		'user_id',
 		'body',
-		'image_url'
+		'image_path'
 	];
 
 	protected $dates = ['publication_date'];
@@ -26,8 +26,10 @@ class News extends Model
 	}
 
 	public function s3_Url() {
-		return Storage::disk('s3')->temporaryUrl(
-			$this->image_url, now()->addMinutes(5)
-		);
+		if ($this->image_path) {
+			return Storage::disk('s3')->temporaryUrl(
+				$this->image_path, now()->addMinutes(5)
+			);
+		}
 	}
 }

@@ -27,7 +27,7 @@ class NewsFactory extends Factory
             'body' => $this->faker->paragraph(),
             'publication_date' => $this->faker->dateTimeBetween('this week', '+6 days'),
             'user_id' => \App\Models\User::factory(),
-            'image_url' => 'http://www.xinhuanet.com/english/2019-12/31/138667595_15777248770611n.jpg'
+            'image_path' => '16124174308ZPAFIekF8.jpg'
         ];
     }
 }

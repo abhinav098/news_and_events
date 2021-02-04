@@ -31,7 +31,7 @@ class NewsController extends Controller
 	 */
 	public function index()
 	{
-		$news = News::latest('id')->get();
+		$news = News::latest('created_at')->get();
 		return view('news.index', ['news' => $news]);
 	}
 
@@ -51,7 +51,7 @@ class NewsController extends Controller
 		$uploadResponse = $this->uploadToS3($request);
 		$upload_filename =  $uploadResponse ?? null;
 
-		$added_params = ['image_url'=>$upload_filename, 'user_id' => auth()->user()->id];
+		$added_params = ['image_path'=>$upload_filename, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
 		// dd($all_params);
 		News::create($all_params);
@@ -70,7 +70,7 @@ class NewsController extends Controller
 		$upload_filename =  $uploadResponse ?? null;
 		$upload_filename = $request->hasFile('file') ? $upload_filename : $news->file_path;
 
-		$added_params = ['image_url'=>$upload_filename, 'user_id' => auth()->user()->id];
+		$added_params = ['image_path'=>$upload_filename, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
 		$news->update($all_params);
 		return redirect('/news/'.$news->id);
@@ -78,8 +78,11 @@ class NewsController extends Controller
 
 	public function destroy(News $news)
 	{
-		$news->destroy();
-		redirect('/news');
+		if ($news->image_path){
+			Storage::disk('s3')->delete($news->image_path);
+		}
+		$news->delete();
+		return redirect('/news');
 	}
 
 	private function validateEvent() {

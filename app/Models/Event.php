@@ -27,9 +27,11 @@ class Event extends Model
 	protected $dates = ['start_date', 'end_date', 'time'];
 
 	public function s3_Url() {
-		return Storage::disk('s3')->temporaryUrl(
-			$this->file_path, now()->addMinutes(20)
-		);
+		if ($this->file_path) {
+			return Storage::disk('s3')->temporaryUrl(
+				$this->file_path, now()->addMinutes(20)
+			);
+		}
 	}
 
 	public function user() {

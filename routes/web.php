@@ -5,6 +5,10 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\NewsController;
 
+use App\Http\Controllers\api\NewsController as NewsApiController;
+use App\Http\Controllers\api\EventsController as EventsApiController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +28,10 @@ Auth::routes();
 
 // Routes for news
 Route::resource('news', NewsController::class);
-// Route::get('/news', [NewsController::class, 'index'])->name('news');
+Route::get('/api/news', [NewsApiController::class, 'index']);
+Route::get('/api/news/search', [NewsApiController::class, 'search']);
+Route::get('/api/news/{id}', [NewsApiController::class, 'show']);
+
 // Route::get("/news/new", [NewsController::class, 'create']);
 // Route::post("/news", [NewsController::class, 'store']);
 // Route::get("/news/{id}/edit", [NewsController::class, 'edit']);
@@ -33,3 +40,6 @@ Route::resource('news', NewsController::class);
 
 // Routes for events
 Route::resource('events', EventsController::class);
+Route::get('/api/events', [EventsApiController::class, 'index']);
+Route::get('/api/events/search', [EventsApiController::class, 'search']);
+Route::get('/api/events/{id}', [EventsApiController::class, 'show']);

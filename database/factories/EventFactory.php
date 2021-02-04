@@ -34,6 +34,7 @@ class EventFactory extends Factory
             'description' => $this->faker->paragraph(),
             'title' => $this->faker->sentence(),
             'user_id' => \App\Models\User::factory(),
+            'file_path' => '1612389855MQ95l7grS7.pdf'
         ];
     }
 }

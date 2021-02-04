@@ -15,18 +15,13 @@
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-	{{-- <!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> --}}
-
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
 	<div id="app">
-		<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+		<nav class="navbar navbar-expand-md shadow-sm">
 			<div class="container">
 				<a class="navbar-brand" href="{{ url('/') }}">
 					{{ config('app.name', 'Laravel') }}
@@ -51,11 +46,11 @@
 								</li>
 							@endif
 
-							@if (Route::has('register'))
+							{{-- @if (Route::has('register'))
 								<li class="nav-item">
 									<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
 								</li>
-							@endif
+							@endif --}}
 						@else
 							<li class="nav-item">
 								<a class="nav-link" href="/news">News</a>
@@ -88,7 +83,7 @@
 		<main class="py-4">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-10 offset-1">
+					<div class="col-md-12">
 						@yield('content')
 					</div>
 				</div>

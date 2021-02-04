@@ -7,8 +7,15 @@
 				<div class="col-md-8">
 					<h3>{{ $news_article->headline }}</h3>
 					<p>Published on: {{$news_article->publication_date->format('j F, Y') }}</p>
-
-					@if ($news_article->image_url)
+					<p>
+						<form action="/news/{{$news_article->id}}" method="POST">
+							@csrf
+							@method('DELETE')
+							<a class="btn btn-primary" href="/news/{{$news_article->id}}/edit">Edit</a>
+							<button type='submit' class='btn btn-danger'>Delete</button>
+						</form>
+					</p>
+					@if ($news_article->image_path)
 						<img src="{{ $news_article->s3_url()}}" height="50%" alt="" srcset="">
 					@endif
 					<br>
@@ -18,5 +25,4 @@
 			</div>
 		</div>
 	</div>
-
 @endsection

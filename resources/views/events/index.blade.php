@@ -10,33 +10,22 @@
 							<h1 class="center">Events</h1>
 						</div>
 						<div class="col-md-4">
-							<button>
-								<a href="/events/create"> Create an Event </a>
-							</button>
+							<a class="btn btn-outline-primary" href="/events/create"> Create new Event </a>
 						</div>
 					</div>
 					<br/>
-					<div class="listings">
+					<div class="event-listings">
 						<div class="container-sm">
-							<div class="row row-cols-3">
+							<div class="row">
 								@foreach ($events as $event)
-									<br />
-									<a href="{{route('events.show', $event)}}">
-										<div class="card">
-											<div class="card-header">
-												{{ $event->title }}
-												<br>
-												{{$event->start_date->format('j F, Y') }} - {{$event->end_date->format('j F, Y') }}
-												<br>
-												{{$event->time->format('H:i') }}
-											</div>
-											<div class="card-body">
-												<p>{{ $event->location }}</p>
-												<p>{{ $event->description }}</p>
-											</div>
-										</div>
-										<br>
-									</a>
+									<div class="event col-md-8">
+										<a href="{{route('events.show', $event)}}">
+											<h4>{{ $event->title }}</h4>
+											<p>{{$event->start_date->format('j F, Y') }} to {{$event->end_date->format('j F, Y') }} at {{$event->time->format('H:i') }}</p>
+											<p>{{ $event->location }}</p>
+										</a>
+									</div>
+									<hr />
 								@endforeach
 							</div>
 						</div>

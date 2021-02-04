@@ -7,26 +7,26 @@
 				<h1 class="center">News</h1>
 			</div>
 			<div class="col-md-4">
-				<button>
-					<a href="/news/create"> Create a news article </a>
-				</button>
+				<a class="btn btn-outline-primary" href="/news/create"> Create news article </a>
 			</div>
 		</div>
 		<br/>
-		@foreach ($news as $news_article)
-			<br />
-			<a href="{{route('news.show', $news_article->id)}}">
-				<div class="card">
-					<div class="card-header">
-						{{ $news_article->headline }}
-						<p>{{ $news_article->publication_date }}</p>
+
+		<div class="container-sm">
+			@foreach ($news as $news_article)
+				<div class="row article">
+					<div class="col-4">
+						<img src="{{ $news_article->s3_url()}}" onerror="this.src = 'https://climate.onep.go.th/wp-content/uploads/2020/01/default-image.png'">
 					</div>
-					<div class="card-body">
-						<p>{{ $news_article->author->name }}</p>
-						<p>{{ $news_article->body }}</p>
+					<div class="col-8">
+						<a href="{{route('news.show', $news_article->id)}}">
+							<h3>{{ $news_article->headline }}</h3>
+						</a>
+						<p>{{ $news_article->publication_date->format('j M, Y') }} by {{ $news_article->author->name }}</p>
 					</div>
+					<hr />
 				</div>
-			</a>
-		@endforeach
+			@endforeach
+		</div>
 	</div>
 @endsection

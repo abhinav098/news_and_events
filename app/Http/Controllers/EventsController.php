@@ -15,7 +15,6 @@ class EventsController extends Controller
 	public function __construct()
 	{
 		$this->middleware('auth');
-		$this->user = Auth::user();
 	}
 	/**
 	 * Display a listing of the resource.
@@ -24,7 +23,7 @@ class EventsController extends Controller
 	 */
 	public function index()
 	{
-		$events = Event::latest('id')->get();
+		$events = Event::orderBy('start_date', "asc")->get();
 		return view('events.index', ['events' => $events]);
 	}
 
@@ -52,8 +51,8 @@ class EventsController extends Controller
 
 		$added_params = ['file_path'=>$upload_filename, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
-		Event::create($all_params);
-		return redirect('/events');
+		$event = Event::create($all_params);
+		return redirect('/events/'.$event->id);
 	}
 
 	/**
@@ -107,7 +106,11 @@ class EventsController extends Controller
 	 */
 	public function destroy(Event $event)
 	{
-		//
+		if ($event->file_path){
+			Storage::disk('s3')->delete($event->file_path);
+		}
+		$event->delete();
+		return redirect('/events');
 	}
 
 	private function validateEvent() {

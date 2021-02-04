@@ -10,12 +10,17 @@
 				<p>Time: {{$event->time->format('H:i') }}</p>
 				<p>{{ $event->description }}</p>
 				<p>{{ $event->location }}</p>
-				@if($event->file_path)
-					<a class="btn btn-secondary" href="{{$event->s3_Url()}}" target="_blank" download>
-						Download {{ $event->file_path }}
-					</a>
-				@endif
-				<a class="btn btn-primary" href="/events/{{$event->id}}/edit">Edit</a>
+				<form action="/events/{{$event->id}}" method="POST">
+					@csrf
+					@method('DELETE')
+					<a class="btn btn-primary" href="/events/{{$event->id}}/edit">Edit</a>
+					<button type='submit' class='btn btn-danger'>Delete</button>
+					@if($event->file_path)
+						<a class="btn btn-secondary" href="{{$event->s3_Url()}}" target="_blank" download>
+							Download {{ $event->file_path }}
+						</a>
+					@endif
+				</form>
 			</div>
 			{{-- <a href="/events/{{$event->id}}/edit">Destroy</a> --}}
 		</div>
