@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
-					<h3>{{ $news_article->headline }}</h3>
+					<h1>{{ $news_article->headline }}</h1>
 					<p>Published on: {{$news_article->publication_date->format('j F, Y') }}</p>
 					<p>
 						<form action="/news/{{$news_article->id}}" method="POST">

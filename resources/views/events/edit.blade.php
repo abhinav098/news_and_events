@@ -40,7 +40,12 @@
 
     <div class="form-group">
       <label for="location">Location</label>
-      <input type="text" name="location" value="{{ $event->location }}" class="form-control" id="location">
+      <select class="form-control" id="location" name="location" required focus>
+        <option value="" disabled selected>Select Location</option>
+        @foreach($locations as $location)
+          <option value="{{$location}}" @if($event->location == $location) selected  @endif>{{ $location }}</option>
+        @endforeach
+      </select>
     </div>
 
     <div class="form-group">
@@ -51,7 +56,6 @@
       <br>
       <input type="file" id="attachment" name="file" accept="application/pdf" aria-describedby="file-name">
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 @endsection

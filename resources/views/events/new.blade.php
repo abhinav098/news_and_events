@@ -38,7 +38,12 @@
 
     <div class="form-group">
       <label for="location">Location</label>
-      <input type="text" name="location" value="{{old('location')}}" class="form-control" id="location">
+      <select class="form-control" id="location" name="location" required focus>
+        <option value="" disabled selected>Select Location</option>
+        @foreach($locations as $location)
+          <option value="{{$location}}" @if(old('location') == $location) selected  @endif>{{ $location }}</option>
+        @endforeach
+      </select>
     </div>
 
     <div class="form-group">

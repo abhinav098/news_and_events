@@ -87,8 +87,8 @@ class NewsController extends Controller
 
 	private function validateEvent() {
     return request()->validate([
-      'headline' => 'required|min:5',
-      'body' => 'required',
+      'headline' => 'required|min:5|max:60',
+      'body' => 'required|min:20',
       'publication_date' => 'required|date',
 			'image' => 'mimes:jpg,jpeg'
 		]);

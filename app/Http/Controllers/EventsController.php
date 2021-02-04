@@ -12,6 +12,16 @@ use Illuminate\Support\Str;
 
 class EventsController extends Controller
 {
+	public const LOCATIONS = [
+		'Alabama (AL)', 'Alaska (AK)', 'American Samoa (AS)', 'Arizona (AZ)', 'Arkansas (AR)',
+		'California (CA)', 'Colorado (CO)', 'Connecticut (CT)', 'Delaware (DE)', 'District of Columbia (DC)',
+		'States of Micronesia (FM)', 'Florida (FL)', 'Georgia (GA)', 'Guam (GU)', 'Hawaii (HI)', 'Idaho (ID)',
+		'Illinois (IL)', 'Indiana (IN)', 'Iowa (IA)', 'Kansas (KS)', 'Kentucky (KY)', 'Louisiana (LA)', 'Maine (ME)',
+		'Marshall Islands (MH)', 'Maryland (MD)', 'Massachusetts (MA)', 'Michigan (MI)', 'Minnesota (MN)', 'Mississippi (MS)',
+		'Missouri (MO)', 'Montana (MT)', 'Nebraska (NE)', 'Nevada (NV)', 'New Hampshire (NH)', 'New Jersey (NJ)',
+		'New Mexico (NM)', 'New York (NY)', 'North Carolina (NC)', 'North Dakota (ND)', 'Northern Mariana Islands (MP)', 'Ohio (OH)', 'Oklahoma (OK)', 'Oregan (OR)', 'Palau (PW)', 'Pennsilvania (PA)', 'Puerto Rico (PR)', 'Rhode Island (RI)', 'South Carolina (SC)', 'South Dakota (SD)', 'Tennessee (TN)', 'Texas (TX)', 'Utah (UT)', 'Vermont (VT)', 'Virgin Islands (VI)', 'Virginia (VA)', 'Washington (WA)', 'West Virginia (WV)', 'Wisconsin (WI)', 'Wyoming (WY)'
+	];
+
 	public function __construct()
 	{
 		$this->middleware('auth');
@@ -34,7 +44,7 @@ class EventsController extends Controller
 	 */
 	public function create()
 	{
-		return view('events.new');
+		return view('events.new', ['locations' => EventsController::LOCATIONS]);
 	}
 
 	/**
@@ -74,7 +84,7 @@ class EventsController extends Controller
 	 */
 	public function edit(Event $event)
 	{
-		return view('events.edit', ['event' => $event]);
+		return view('events.edit', ['event' => $event, 'locations' => EventsController::LOCATIONS]);
 	}
 
 	/**
@@ -116,9 +126,9 @@ class EventsController extends Controller
 	private function validateEvent() {
     // 'request()->validate()' returns validated attributes if validations pass
     return request()->validate([
-      'title' => 'required|min:5',
-      'description' => 'required',
-      'start_date' => 'required|date|after:now()',
+      'title' => 'required|min:5|max:60',
+      'description' => 'required|min:20',
+      'start_date' => 'required|date',
 			'end_date' => 'required|date|after_or_equal:start_date',
       'time' => 'required',
 			'location' => 'required',

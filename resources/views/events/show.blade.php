@@ -4,7 +4,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
-				<h3>{{ $event->title }}</h3>
+				<h1>{{ $event->title }}</h1>
 				<p>Start Date: {{$event->start_date->format('j F, Y') }}</p>
 				<p>End Date: {{$event->end_date->format('j F, Y') }}</p>
 				<p>Time: {{$event->time->format('H:i') }}</p>

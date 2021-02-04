@@ -20,7 +20,7 @@
 								@foreach ($events as $event)
 									<div class="event col-md-8">
 										<a href="{{route('events.show', $event)}}">
-											<h4>{{ $event->title }}</h4>
+											<h2>{{ $event->title }}</h2>
 											<p>{{$event->start_date->format('j F, Y') }} to {{$event->end_date->format('j F, Y') }} at {{$event->time->format('H:i') }}</p>
 											<p>{{ $event->location }}</p>
 										</a>
