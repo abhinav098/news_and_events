@@ -29,7 +29,6 @@ Auth::routes();
 // Routes for news
 Route::resource('news', NewsController::class);
 Route::get('/api/news', [NewsApiController::class, 'index']);
-Route::get('/api/news/search', [NewsApiController::class, 'search']);
 Route::get('/api/news/{id}', [NewsApiController::class, 'show']);
 
 // Route::get("/news/new", [NewsController::class, 'create']);
@@ -41,5 +40,4 @@ Route::get('/api/news/{id}', [NewsApiController::class, 'show']);
 // Routes for events
 Route::resource('events', EventsController::class);
 Route::get('/api/events', [EventsApiController::class, 'index']);
-Route::get('/api/events/search', [EventsApiController::class, 'search']);
 Route::get('/api/events/{id}', [EventsApiController::class, 'show']);

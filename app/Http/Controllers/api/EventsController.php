@@ -11,22 +11,15 @@ use App\Http\Controllers\Controller;
 class EventsController extends Controller
 {
 
-	public function index()
+	public function index(Request $request)
 	{
-			return new EventsCollection(Event::orderBy('start_date', 'ASC')->get());
-
+		$query = trim($request->q);
+		return new EventsCollection(Event::where('title', 'like', '%'.$query.'%')->orderBy('start_date', "ASC")->get());
 	}
 
 	public function show($id)
 	{
 			return new EventResource(Event::findOrFail($id));
 
-	}
-
-	public function search(Request $request)
-	{
-		$query = trim($request->q);
-		$results = Event::where('title', 'like', '%'.$query.'%')->orderBy('start_date', "ASC")->get();
-		return new EventsCollection($results);
 	}
 }

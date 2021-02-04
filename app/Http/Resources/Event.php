@@ -22,7 +22,7 @@ class Event extends JsonResource
 			'time'				=> $this->time,
 			'location'		=> $this->location,
       'description' => $this->description,
-      'file_path' => $this->s3_url() ?? '',
+      'file_url' => $this->s3_url() ?? '',
       'created_at' => $this->created_at,
       'updated_at' => $this->updated_at,
     ];

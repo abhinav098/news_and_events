@@ -11,18 +11,15 @@ use App\Http\Controllers\Controller;
 class NewsController extends Controller
 {
 
-	public function index()
+	public function index(Request $request)
 	{
-		return new NewsCollection(News::latest('publication_date')->get());
+		$query = trim($request->q);
+		return new NewsCollection(News::where('headline', 'like', '%'.$query.'%')->latest('publication_date')->get());
 	}
 
 	public function show($id)
 	{
 			return new NewsResource(News::findOrFail($id));
 
-	}
-	public function search(Request $request) {
-		$query = trim($request->q);
-		return new NewsCollection(News::where('headline', 'like', '%'.$query.'%')->latest('publication_date')->get());
 	}
 }
