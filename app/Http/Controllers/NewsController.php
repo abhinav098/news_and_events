@@ -29,9 +29,14 @@ class NewsController extends Controller
 	 *
 	 * @return \Illuminate\Contracts\Support\Renderable
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$news = News::latest('created_at')->get();
+		$news;
+		if($request->q === 'all'){
+			$news = News::latest('created_at')->get();
+		} else {
+			$news = News::where('user_id', auth()->user()->id)->get();
+		}
 		return view('news.index', ['news' => $news]);
 	}
 

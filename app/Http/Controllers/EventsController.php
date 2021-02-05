@@ -31,9 +31,14 @@ class EventsController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$events = Event::orderBy('start_date', "asc")->get();
+		$events;
+		if($request->q === 'all'){
+			$events = Event::latest('created_at')->get();
+		} else {
+			$events = Event::where('user_id', auth()->user()->id)->get();
+		}
 		return view('events.index', ['events' => $events]);
 	}
 

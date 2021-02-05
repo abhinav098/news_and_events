@@ -53,12 +53,28 @@
 								</li>
 							@endif --}}
 						@else
-							<li class="nav-item">
-								<a class="nav-link" href="/news">News</a>
+							<li class="nav-item dropdown">
+								<a id="newsDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+									News
+								</a>
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="newsDropdown">
+									<a class="dropdown-item" href="/news?q=all">All News</a>
+									<a class="dropdown-item" href="/news">My News Articles</a>
+									<a class="dropdown-item" href="/news/create">Create News</a>
+								</div>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/events">Events</a>
+							<li class="nav-item dropdown">
+								<a id="eventDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+									Events
+								</a>
+
+								<div class="dropdown-menu dropdown-menu-right" aria-labelledby="eventDropdown">
+									<a class="dropdown-item" href="/events?q=all">All Events</a>
+									<a class="dropdown-item" href="/events">My Events</a>
+									<a class="dropdown-item" href="/events/create">Create Event</a>
+								</div>
 							</li>
+
 							<li class="nav-item dropdown">
 								<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 									{{ Auth::user()->name }}
