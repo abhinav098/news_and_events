@@ -58,8 +58,8 @@ class NewsController extends Controller
 
 		$added_params = ['image_path'=>$upload_filename, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
-		News::create($all_params);
-		return redirect('/news');
+		$news = News::create($all_params);
+		return redirect('/news/'.$news->id);
 	}
 
 	public function edit(News $news)
