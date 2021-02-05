@@ -96,12 +96,13 @@ class EventsController extends Controller
 	 */
 	public function update(Request $request, Event $event)
 	{
+		$file_path = $event->file_path;
+		if ($request->hasFile('file')) {
+			$uploadResponse = $this->uploadToS3($request);
+			$file_path =  $uploadResponse ?? null;
+		}
 		$validated_params = $this->validateEvent();
-		$uploadResponse = $this->uploadToS3($request);
-		$upload_filename =  $uploadResponse ?? null;
-		$upload_filename = $request->hasFile('file') ? $upload_filename : $event->file_path;
-
-		$added_params = ['file_path'=>$upload_filename, 'user_id' => auth()->user()->id];
+		$added_params = ['file_path'=>$file_path, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
 		$event->update($all_params);
 		return redirect('/events');

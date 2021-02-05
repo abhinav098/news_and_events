@@ -65,12 +65,14 @@ class NewsController extends Controller
 
 	public function update(Request $request, News $news)
 	{
+		$file_path = $news->image_path;
+		if ($request->hasFile('image')) {
+			$uploadResponse = $this->uploadToS3($request);
+			$file_path =  $uploadResponse ?? null;
+		}
 		$validated_params = $this->validateEvent();
-		$uploadResponse = $this->uploadToS3($request);
-		$upload_filename =  $uploadResponse ?? null;
-		$upload_filename = $request->hasFile('file') ? $upload_filename : $news->file_path;
 
-		$added_params = ['image_path'=>$upload_filename, 'user_id' => auth()->user()->id];
+		$added_params = ['image_path'=>$file_path, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
 		$news->update($all_params);
 		return redirect('/news/'.$news->id);
