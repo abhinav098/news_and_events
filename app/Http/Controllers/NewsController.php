@@ -35,7 +35,7 @@ class NewsController extends Controller
 		if($request->q === 'all'){
 			$news = News::latest('created_at')->get();
 		} else {
-			$news = News::where('user_id', auth()->user()->id)->get();
+			$news = News::where('user_id', auth()->user()->id)->latest()->get();
 		}
 		return view('news.index', ['news' => $news]);
 	}

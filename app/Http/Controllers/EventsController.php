@@ -37,7 +37,7 @@ class EventsController extends Controller
 		if($request->q === 'all'){
 			$events = Event::latest('created_at')->get();
 		} else {
-			$events = Event::where('user_id', auth()->user()->id)->get();
+			$events = Event::where('user_id', auth()->user()->id)->latest()->get();
 		}
 		return view('events.index', ['events' => $events]);
 	}
@@ -110,7 +110,6 @@ class EventsController extends Controller
 		$added_params = ['file_path'=>$file_path, 'user_id' => auth()->user()->id];
 		$all_params = array_merge($validated_params, $added_params);
 		$event->update($all_params);
-		return redirect('/events');
 		return redirect('/events/'.$event->id);
 	}
 
