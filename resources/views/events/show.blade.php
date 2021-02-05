@@ -17,12 +17,11 @@
 					<button type='submit' class='btn btn-danger'>Delete</button>
 					@if($event->file_path)
 						<a class="btn btn-secondary" href="{{$event->s3_Url()}}" target="_blank" download>
-							Download {{ $event->file_path }}
+							Download Attachment
 						</a>
 					@endif
 				</form>
 			</div>
-			{{-- <a href="/events/{{$event->id}}/edit">Destroy</a> --}}
 		</div>
 
 	</div>

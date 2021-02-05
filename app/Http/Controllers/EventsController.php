@@ -134,7 +134,7 @@ class EventsController extends Controller
     return request()->validate([
       'title' => 'required|min:5|max:60',
       'description' => 'required|min:20',
-      'start_date' => 'required|date',
+      'start_date' => 'required|date|after_or_equal:today',
 			'end_date' => 'required|date|after_or_equal:start_date',
       'time' => 'required',
 			'location' => 'required',

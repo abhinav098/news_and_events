@@ -23,7 +23,7 @@ class EventFactory extends Factory
     {
 			// App\Models\Article::factory(4)->create(['user_id' => 5]);
 
-			$startingDate = $this->faker->dateTimeBetween('last month', '+6 days');
+			$startingDate = $this->faker->dateTimeBetween('yesterday', '+6 days');
 			// Random datetime of the current week *after* `$startingDate`
 			$endingDate = $this->faker->dateTimeBetween($startingDate, strtotime('+6 days'));
 
